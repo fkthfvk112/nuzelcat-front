@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navigation from "./(components)/Navigation";
+import { url } from "./(constants)/Urls";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,12 +23,22 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) 
+{
+  const navItems = [
+    { label: '홈', href: '/' },
+    { label: '업로드', href: url.UPLOAD },
+    { label: '문의', href: '/contact' },
+  ];
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Navigation items={navItems} style={{ backgroundColor: '#fff' }}>
+          <button style={{ marginLeft: 'auto' }}>로그인</button>
+        </Navigation>
         {children}
       </body>
     </html>

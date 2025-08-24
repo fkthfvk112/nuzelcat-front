@@ -1,0 +1,31 @@
+.embla {
+  --slide-spacing: 0;
+  --slide-size: 100%;
+  padding: 0;               
+}
+
+.embla__viewport {
+  overflow: hidden;    
+  border-radius: 1rem; 
+}
+
+.embla__container {
+  display: flex;
+  backface-visibility: hidden;
+  touch-action: pan-y;
+  margin-left: 0;         
+}
+
+.embla_img_slide {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;   
+  overflow: hidden;           
+  border-radius: 1rem;
+}
+
+.inner-img {
+  object-fit: cover;
+}
