@@ -5,11 +5,12 @@ import serverFetch from "@/app/(utils)/serverFetch";
 import { PostDetailInterface } from "@/app/(types)/post";
 import { ImageCardInterface } from "@/app/(types)/Image";
 import { removeUndefined } from "@/app/(utils)/removeUndefined";
+import { defaultAxios } from "@/app/(utils)/axiosInstance";
 
 export async function fetchPostDetail(postId: number): Promise<PostDetailInterface> {
   return serverFetch({
     url: `post/${postId}`,
-    option: { method: "GET" },
+    option: { method: "GET", cache:"no-cache" },
   });
 }
 
@@ -30,7 +31,7 @@ export async function fetchPostCards(params: {
     title: params.title,
     catName: params.catName,
     tag: params.tag,
-    sortDir: params.sortDir ?? "desc",
+    sortDir: params.sortDir ?? "score_desc", // 기본값  = 인기도 내림차순
     page: typeof params.page === "string" ? parseInt(params.page) : params.page ?? 0,
     size: typeof params.size === "string" ? parseInt(params.size) : params.size ?? 10,
   });
@@ -41,3 +42,4 @@ export async function fetchPostCards(params: {
     option: { method: "GET" },
   });
 }
+

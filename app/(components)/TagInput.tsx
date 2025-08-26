@@ -8,9 +8,11 @@ interface TagInputProps {
   tags: string[];
   setTags: React.Dispatch<React.SetStateAction<string[]>>;
   maxTags?: number;
+  info?:string;
+  required?:boolean;
 }
 
-export default function TagInput({ tags, setTags, maxTags = 3 }: TagInputProps) {
+export default function TagInput({ tags, setTags, maxTags = 3, info, required }: TagInputProps) {
   const [tagInput, setTagInput] = useState<string>("");
 
   // 태그 추가
@@ -41,6 +43,8 @@ export default function TagInput({ tags, setTags, maxTags = 3 }: TagInputProps) 
     <div className="w-full my-4">
       <CommonInput
         title={`태그 (최대 ${maxTags}개)`}
+        info={info}
+        required={true}
         type="text"
         value={tagInput}
         placeholder="태그 입력 후 Enter"

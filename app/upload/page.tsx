@@ -65,7 +65,6 @@ export default function Upload(){
         if (file) {
             try {
             const base64StrImg = (await resizeFileToBase64(file, 1200, 1200)) as string;
-
                 setImages((prev) => [
                     ...(prev || []), // 기존 배열 복사
                     {
@@ -86,7 +85,7 @@ export default function Upload(){
             <RedPinkText className="text-2xl mb-10" text="고양이 자랑하기"/>
             <InnerContainer style={{ maxWidth: '512px', minHeight:'300px', padding:"3rem" }}>
                 <div></div>
-                <CommonInput title="제목" type="text" placeholder="제목" value={title}
+                <CommonInput title="제목" type="text" placeholder="제목" value={title} required={true}
                     maxLength={50}      
                     onChange={(e)=>setTitle(e.target.value)}/>
                     <div className="w-full flex flex-start my-3">
@@ -139,7 +138,7 @@ export default function Upload(){
                     ))
                     }
                     </section>
-                    <TagInput tags={tags} setTags={setTags} maxTags={3} />
+                    <TagInput tags={tags} setTags={setTags} maxTags={3} info="밈, 길냥이, 집냥이 등" />
                     <CommonInput title="게시글 비밀번호" maxLength={20} type="text" placeholder="게시글 비밀번호(삭제시 사용)" value={pw}       
                         onChange={(e)=>setPw(e.target.value)}/>
                 <GreenButton onClick={uploadPost} className="w-full max-w-[500px] mt-5">업로드</GreenButton>

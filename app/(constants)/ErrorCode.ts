@@ -59,4 +59,6 @@ export const errorCode = [
     "IM001",
 
     "EM001",
+
+    "LIKE001"
 ];

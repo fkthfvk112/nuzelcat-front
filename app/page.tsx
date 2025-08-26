@@ -20,11 +20,6 @@ export default async function Home() {
     { name: '업로드', url: url.UPLOAD },
   ];
 
-  const getMedalType = (inx:number):MedalType|undefined=>{
-    if(inx === 0) return "gold";
-    if(inx === 1) return "silver";
-    if(inx === 2) return "bronze";
-  }
 
   const cardData  = await fetchPostCards({});
   

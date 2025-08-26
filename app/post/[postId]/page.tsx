@@ -6,16 +6,13 @@ import EmblaCarousel from "@/app/(components)/EmblaCarousel";
 import InnerContainer from "@/app/(components)/InnerContaner";
 import { DarkText, MediumDarkText, RedPinkText } from "@/app/(components)/Texts";
 import { ColorCode } from "@/app/(constants)/Colors";
-import { PostDetailInterface } from "@/app/(types)/post";
-import { postDetailMock } from "@/app/(utils)/mock";
-import Image from "next/image";
-import { useState } from "react";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EyesIcon from "@/app/(constants)/EyesIcon";
 import { timeDifferenceString } from "@/app/(utils)/timeUtil";
 import Line from "@/app/(components)/Line";
 import RecommandTagImgList from "./RecommandTagImgList";
 import { fetchPostDetail } from "@/app/(api)/(post)/post";
+import LikeButton from "./LikeBtn";
 
 type Props = {
   params: Promise<{ postId: string }>
@@ -50,10 +47,11 @@ export default async function Post({ params }: Props,){
                     </div>
                     <div className="text-[0.65rem] flex justify-between items-center mt-3">
                         <div className="flex space-x-2">
-                            <div className="flex items-center">
+                            {/* <div className="flex items-center">
                                 <FavoriteIcon className="w-4 h-4" sx={{color:ColorCode.lightRed}}/>
                                 <MediumDarkText className="ms-1" text={String(postData.likeCnt)}/>
-                            </div>
+                            </div> */}
+                            <LikeButton postId={Number(postId)} initialLikeCnt={postData.likeCnt} />
                             <div className="flex items-center">
                                 <EyesIcon sx={{fontSize: 35, color:ColorCode.mediumDark}}/>
                                 <MediumDarkText className="ms-1" text={String(postData.viewCnt)}/>

@@ -1,14 +1,18 @@
 import React, { CSSProperties, InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 import { ColorCode } from "../(constants)/Colors";
 import { DarkText } from "./Texts";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import Require from "./Require";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   title?:string;
   style?: CSSProperties;
   className?: string;
+  info?:string;
+  required?:boolean;
 }
 
-export const CommonInput: React.FC<InputProps> = ({ title, style, className, ...rest }) => {
+export const CommonInput: React.FC<InputProps> = ({ title, style, className, info, required, ...rest }) => {
   const defaultStyle: CSSProperties = {
     border: "1px solid #ccc",
     borderRadius: "0.5rem",
@@ -21,8 +25,17 @@ export const CommonInput: React.FC<InputProps> = ({ title, style, className, ...
   };
 
   return <div className="w-full">
-          {title&&<DarkText className="ms-1" text={title}/>}
+          <div className="flex">
+            {title&&<DarkText className="ms-1" text={title}/>}
+            {required&&<Require/>}
+          </div>
           <input style={defaultStyle} className={className} {...rest} />
+            {info && (
+              <div className="flex">
+                <InfoOutlinedIcon sx={{ fill: ColorCode.Dark, marginRight: '0.25rem' }} />
+                {<div style={{color:ColorCode.lightDark}}>{info}</div>}
+              </div>
+            )}        
         </div>
 };
 

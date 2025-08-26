@@ -18,6 +18,7 @@ export const defaultAxios = axios.create({
     return res;
   },
   (err)=>{
+    console.log("에러", err);
     if (err.message === "Network Error" || err.code === 'ERR_INTERNET_DISCONNECTED') {
       Swal.fire({
       title: "인터넷 연결 실패",

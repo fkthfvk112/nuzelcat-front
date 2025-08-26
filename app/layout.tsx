@@ -37,7 +37,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navigation items={navItems} style={{ backgroundColor: '#fff' }}>
-          <button style={{ marginLeft: 'auto' }}>로그인</button>
+          {/* <button style={{ marginLeft: 'auto' }}>로그인</button> */}
         </Navigation>
         {children}
       </body>
