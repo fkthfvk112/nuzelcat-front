@@ -56,13 +56,12 @@ export default function ImgCard({ imgCardData, maxWidth, minWidth, medalType }: 
         <div className="flex items-center justify-between mt-3 relative">
           {/* 버블링 차단 래퍼 */}
           <div
-            className="absolute flex flex-col -top-[60px]"
+            className="absolute flex flex-col -top-[35px]"
             onClick={(e) => e.stopPropagation()}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
             }}
           >
-            <Badge text={imgCardData.catName} colorCode={ColorCode.yellow} />
             <div className="flex">
               {imgCardData.tags.map((tag, inx) => (
                 <Badge
