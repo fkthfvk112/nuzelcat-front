@@ -17,6 +17,10 @@ import { defaultAxios } from "../(utils)/axiosInstance";
 import { useRouter } from "next/navigation";
 import { url } from "../(constants)/Urls";
 import Swal from "sweetalert2";
+import Require from "../(components)/Require";
+import { validateUploadPayload } from "../(utils)/validator/validateUploadDate";
+import { emptyToNull } from "../(utils)/helper";
+import { UploadPayload } from "../(types)/post";
 
 export default function Upload(){
     const [title, setTitle]     = useState<string>("");
@@ -27,19 +31,33 @@ export default function Upload(){
     const [tags, setTags]       = useState<string[]>([]);
     const [pw, setPw]           = useState<string>("");
 
+    const [loading, setLoading] = useState<boolean>(false);
+
     const router = useRouter();
 
     const uploadPost = async () => {
-        const payload = {
+        const payload:UploadPayload = {
             title: title,
-            catName: catName,
-            authorNickname: author,
-            description: desc,
-            authorPassword: pw,
-            tags: tags,
+            catName: emptyToNull(catName),
+            authorNickname: emptyToNull(author),
+            description: emptyToNull(desc),
+            authorPassword: emptyToNull(pw),
+            tags: tags && tags.length > 0 ? tags : null,
             locationRegion: null,
             base64ImgList: images.map(img => img.photoString),
         };
+
+        const validRes = validateUploadPayload(payload)
+        if (!validRes.isValid) {
+            Swal.fire({
+                title: "입력 오류",
+                text: validRes.message,
+                icon: "error",
+                confirmButtonText: "확인"
+            });
+            return;
+        }
+        setLoading(true);
 
         defaultAxios.post("/post", payload).then((res)=>{
             if (res.status === 200) {
@@ -50,6 +68,8 @@ export default function Upload(){
                     router.push(url.POST + res.data)
                 });
             }
+        }).finally(()=>{
+            setLoading(false);
         })
     };
 
@@ -81,7 +101,7 @@ export default function Upload(){
     };
 
     return(
-        <Container style={{ padding: '7.5rem' }}>
+        <Container style={{ padding: '1rem' }}>
             <RedPinkText className="text-2xl mb-10" text="고양이 자랑하기"/>
             <InnerContainer style={{ maxWidth: '512px', minHeight:'300px', padding:"3rem" }}>
                 <div></div>
@@ -90,10 +110,10 @@ export default function Upload(){
                     onChange={(e)=>setTitle(e.target.value)}/>
                     <div className="w-full flex flex-start my-3">
                         <div className="grid grid-cols-2 gap-1 justify-start">
-                            <CommonInput title="고양이 이름" type="text" placeholder="고양이 이름(생략가능)" value={catName}
+                            <CommonInput title="고양이 이름" type="text" placeholder="고양이 이름" value={catName}
                                 maxLength={20}
                                 onChange={(e)=>setCatName(e.target.value)}/>
-                            <CommonInput title="작성자" type="text" placeholder="작성자명(생략가능)" value={author}
+                            <CommonInput title="작성자" type="text" placeholder="작성자명" value={author}
                                 maxLength={20}
                                 onChange={(e)=>setAuthor(e.target.value)}/>
                         </div>
@@ -101,7 +121,7 @@ export default function Upload(){
                 <CommonTextArea 
                     title="설명"
                     value={desc}
-                    placeholder="설명(생략가능)"
+                    placeholder="설명"
                     className="h-[100px]" 
                     maxLength={250}                           
                     onChange={(e)=>setDesc(e.target.value)}/>
@@ -138,10 +158,14 @@ export default function Upload(){
                     ))
                     }
                     </section>
-                    <TagInput tags={tags} setTags={setTags} maxTags={3} info="밈, 길냥이, 집냥이 등" />
-                    <CommonInput title="게시글 비밀번호" maxLength={20} type="text" placeholder="게시글 비밀번호(삭제시 사용)" value={pw}       
+                    <TagInput tags={tags} setTags={setTags} maxTags={3} required={false} info="길냥이, 집냥이, 치즈냥, 고등어, 밈 등" />
+                    <CommonInput title="게시글 비밀번호" maxLength={20} type="text" placeholder="6자 이상" value={pw}
+                        info="게시글 삭제할 때 필요해요."     
                         onChange={(e)=>setPw(e.target.value)}/>
-                <GreenButton onClick={uploadPost} className="w-full max-w-[500px] mt-5">업로드</GreenButton>
+                <GreenButton onClick={uploadPost} className="w-full max-w-[500px] mt-5" disabled={loading}>{loading ? "업로드 중..." : "업로드"}</GreenButton>
+                <div className="flex">
+                    <Require/><div style={{color:"#c1c1c1"}}>업로드 후 수정이 불가능해요.</div> 
+                </div>
             </InnerContainer>
         </Container>
     )    

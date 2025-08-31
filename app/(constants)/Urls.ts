@@ -1,4 +1,6 @@
 export const url = {
     UPLOAD:"/upload",
-    POST:"/post/"
+    POST:"/post/",
+    LIST:"/post/list",
+    SEARCH:"/search"
 }

@@ -57,13 +57,13 @@ function FloatingBtn({floatingBtnDatas}:{floatingBtnDatas:floatingBtnDatasInterf
             <button
                 onClick={clickPlusBtn}
                 className={`${
-                floatingBtnClicked ? "bg-white" : "bg-[#38c54b]"
+                floatingBtnClicked ? "bg-white" : "bg-[#f76c76ff]"
                 } border-none rounded-full w-[60px] h-[60px] cursor-pointer`}
             >
                 {floatingBtnClicked ? (
                 <ClearIcon sx={{ width: "25px", height: "25px" }} />
                 ) : (
-                <AddIcon sx={{ width: "25px", height: "25px" }} />
+                <AddIcon sx={{ width: "25px", height: "25px", fill:"white" }} />
                 )}
             </button>
             </div>

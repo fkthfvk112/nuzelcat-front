@@ -13,6 +13,8 @@ import Line from "@/app/(components)/Line";
 import RecommandTagImgList from "./RecommandTagImgList";
 import { fetchPostDetail } from "@/app/(api)/(post)/post";
 import LikeButton from "./LikeBtn";
+import { url } from "@/app/(constants)/Urls";
+import DeletePostButton from "./DeletePostButton";
 
 type Props = {
   params: Promise<{ postId: string }>
@@ -41,8 +43,9 @@ export default async function Post({ params }: Props,){
                         <MediumDarkText text={postData.description}/>            
                     </div>
                     <div className="flex mt-3 flex-wrap">
+                        {postData.catName&&<Badge text={postData.catName} colorCode={ColorCode.yellow}/>}
                         {
-                            postData.tags.map((tag, inx)=><Badge key={inx} text={tag} colorCode={ColorCode.green}/>)
+                            postData.tags.map((tag, inx)=><Badge key={inx} text={tag} colorCode={ColorCode.green} href={url.LIST + "/1?tags=" + encodeURIComponent(tag)} />)
                         }
                     </div>
                     <div className="text-[0.65rem] flex justify-between items-center mt-3">
@@ -57,13 +60,17 @@ export default async function Post({ params }: Props,){
                                 <MediumDarkText className="ms-1" text={String(postData.viewCnt)}/>
                             </div>
                         </div>
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-around items-center w-[100px]">
                             <MediumDarkText text={postData.createdAt ? timeDifferenceString(new Date(postData.createdAt)):""}/>
+                            <DeletePostButton postId={postId}
+                                // deleteUrl="/post/{id}/delete" 기본값 사용 시 주석 가능
+                                // onDeleted={() => router.push('/')} // 커스텀 성공 처리하고 싶으면 콜백 사용
+                            />
                         </div>
                     </div>
                 </div>
                 <Line className="my-5" variant="half"/>
-                <RecommandTagImgList tagList={postData.tags}/>
+                <RecommandTagImgList tags={postData.tags} postId={postId}/>
             </InnerContainer>
         </Container>
     )    

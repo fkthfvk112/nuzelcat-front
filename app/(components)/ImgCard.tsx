@@ -26,10 +26,14 @@ export default function ImgCard({ imgCardData, maxWidth, minWidth, medalType }: 
     router.push(url.POST+imgCardData.postId);
   }
 
+  const goList = (tagName:string)=>{
+    router.push(url.LIST + "/1?tags=" + tagName)
+  }
+
   return (
     <div
       onClick={()=>{goPost()}}
-      className="flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm w-full flex-1 mb-4
+      className="flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm w-full mb-4
                  cursor-pointer transform transition-transform duration-200 hover:scale-105 relative"
       style={{ maxWidth: `${maxWidth}px`, minWidth: `${minWidth}px` }}
     >
@@ -50,11 +54,27 @@ export default function ImgCard({ imgCardData, maxWidth, minWidth, medalType }: 
       {/* 내용 */}
       <div className="p-2 flex flex-col flex-1">
         <div className="flex items-center justify-between mt-3 relative">
-          <div className="absolute flex -top-[35px]">
-            {imgCardData.tags.map((tag, inx)=><Badge key={inx} text={tag} colorCode={ColorCode.green} />)}
-            <Badge text={imgCardData.catName} colorCode={ColorCode.green}/>
+          {/* 버블링 차단 래퍼 */}
+          <div
+            className="absolute flex flex-col -top-[60px]"
+            onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
+            }}
+          >
+            <Badge text={imgCardData.catName} colorCode={ColorCode.yellow} />
+            <div className="flex">
+              {imgCardData.tags.map((tag, inx) => (
+                <Badge
+                  key={inx}
+                  text={tag}
+                  colorCode={ColorCode.green}
+                  href={url.LIST + "/1?tags=" + encodeURIComponent(tag)}
+                />
+              ))}
+            </div>
           </div>
-          <h1 className="text-sm font-medium truncate">{imgCardData.title}</h1>
+          <h1 className="text-lg font-medium truncate">{imgCardData.title}</h1>
         </div>
         <div className="text-[0.65rem] flex justify-between items-center">
           <div className="flex space-x-2">

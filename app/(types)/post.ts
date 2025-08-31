@@ -10,3 +10,14 @@ export interface PostDetailInterface{
     viewCnt:number;
     createdAt?:string;
 }
+
+export interface UploadPayload {
+  title: string;
+  catName: string|null;
+  authorNickname: string|null;
+  description: string|null;
+  authorPassword: string|null;
+  tags: string[]|null;
+  locationRegion: string | null;
+  base64ImgList: string[];
+}

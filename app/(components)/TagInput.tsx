@@ -44,10 +44,10 @@ export default function TagInput({ tags, setTags, maxTags = 3, info, required }:
       <CommonInput
         title={`태그 (최대 ${maxTags}개)`}
         info={info}
-        required={true}
+        required={required}
         type="text"
         value={tagInput}
-        placeholder="태그 입력 후 Enter"
+        placeholder="# 없이 태그 입력 후 Enter"
         onChange={(e) => setTagInput(e.target.value)}
         onKeyDown={handleAddTag}
         className="w-full border rounded p-2 mt-1"
@@ -56,12 +56,12 @@ export default function TagInput({ tags, setTags, maxTags = 3, info, required }:
         {tags.map((tag, inx) => (
           <div
             key={inx}
-            className="flex items-center bg-red-100 text-red-600 rounded-full px-3 py-1 text-sm"
+            className="bg-[#34D399] text-white flex justify-center items-center w-fit px-3 me-2 mt-1 text-white rounded-md font-bold whitespace-nowrap"
           >
             #{tag}
             <button
               onClick={() => handleDeleteTag(inx)}
-              className="ml-2 text-red-500"
+              className="ml-2 text-dart"
             >
               <ClearIcon fontSize="small" />
             </button>

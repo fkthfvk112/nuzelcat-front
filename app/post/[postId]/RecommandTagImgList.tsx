@@ -1,21 +1,30 @@
-"use client"
+"use server"
 
+import { fetchPostCards } from "@/app/(api)/(post)/post";
 import ClickImg from "@/app/(components)/ClickImg";
-import ImgCard from "@/app/(components)/ImgCard";
 import { DarkText, MediumDarkText } from "@/app/(components)/Texts";
-import { ImageCardInterface } from "@/app/(types)/Image"
-import { recommandImgCardMock } from "@/app/(utils)/mock";
-import { useState } from "react"
 
-export default function RecommandTagImgList({tagList}:{tagList:string[]}){
-    const [cardData, setCardData] = useState<ImageCardInterface[]>(recommandImgCardMock);
+export default async function RecommandTagImgList({postId, tags}:{postId:number|string, tags:string[]}){
+      const cardData = await fetchPostCards({
+        sortDir:"desc",
+        page:0,
+        size:12,
+        tags:tags,
+        exceptId:postId
+      });
+      
+      const tagCat =
+          cardData.content &&
+          cardData.content.map((card, inx)=><ClickImg key={inx} imgUrl={card.repreImgUrl} postId={card.postId} />)
+
+
 
     return(
         <div className="w-full">
             <MediumDarkText className="ms-3" text="관련 사진"/>
             <section className="grid grid-cols-3 w-full gap-1 p-2">
                 {
-                    cardData.map((card, inx)=><ClickImg key={inx} imgUrl={card.repreImgUrl} postId={card.postId} />)
+                    tagCat
                 }
             </section>
         </div>

@@ -30,7 +30,7 @@ export const ColorCode = {
   white:"#ffffffff",
   lightWhite:"#BFBFBF",
   green:"#34D399",
-  yellow:"#ffd640",
+  yellow:"#fabe18ff",
   dark:"#262626",
   mediumDark:"#4D4D4D",
   lightDark:"#9198a1",

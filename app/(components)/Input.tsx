@@ -32,8 +32,8 @@ export const CommonInput: React.FC<InputProps> = ({ title, style, className, inf
           <input style={defaultStyle} className={className} {...rest} />
             {info && (
               <div className="flex">
-                <InfoOutlinedIcon sx={{ fill: ColorCode.Dark, marginRight: '0.25rem' }} />
-                {<div style={{color:ColorCode.lightDark}}>{info}</div>}
+                <InfoOutlinedIcon sx={{ fill: "#c1c1c1", marginRight: '0.25rem' }} />
+                {<div style={{color:"#c1c1c1"}}>{info}</div>}
               </div>
             )}        
         </div>

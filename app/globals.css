@@ -18,18 +18,14 @@
     --foreground: #ededed;
   }
 }
-
 @font-face {
-  font-family: 'Juache';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
-       format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'SeoulNamsan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff');
+    font-weight: bold;
+    font-display: swap;
 }
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Juache', Arial, Helvetica, sans-serif;
+  font-family: 'SeoulNamsan', Arial, Helvetica, sans-serif;
 }
