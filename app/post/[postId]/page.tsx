@@ -15,6 +15,8 @@ import { fetchPostDetail } from "@/app/(api)/(post)/post";
 import LikeButton from "./LikeBtn";
 import { url } from "@/app/(constants)/Urls";
 import DeletePostButton from "./DeletePostButton";
+import TimeDiff from "./TimeDiff";
+import CopyUrl from "@/app/(components)/CopyUrl";
 
 type Props = {
   params: Promise<{ postId: string }>
@@ -59,9 +61,10 @@ export default async function Post({ params }: Props,){
                                 <EyesIcon sx={{fontSize: 35, color:ColorCode.mediumDark}}/>
                                 <MediumDarkText className="ms-1" text={String(postData.viewCnt)}/>
                             </div>
+                            <CopyUrl/>
                         </div>
                         <div className="flex justify-around items-center w-[100px]">
-                            <MediumDarkText text={postData.createdAt ? timeDifferenceString(new Date(postData.createdAt)):""}/>
+                            <TimeDiff time={postData.createdAt as string}></TimeDiff>
                             <DeletePostButton postId={postId}
                                 // deleteUrl="/post/{id}/delete" 기본값 사용 시 주석 가능
                                 // onDeleted={() => router.push('/')} // 커스텀 성공 처리하고 싶으면 콜백 사용
