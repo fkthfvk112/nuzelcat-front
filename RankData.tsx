@@ -10,7 +10,7 @@ export default async function RankData(){
   const cardData  = await fetchPostCards({
     page:0,
     size:3,
-    sortDir:"desc"
+    sortDir:"score_desc"
   });
   
   const getMedalType = (inx:number):MedalType|undefined=>{
