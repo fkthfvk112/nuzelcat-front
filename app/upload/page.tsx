@@ -75,29 +75,43 @@ export default function Upload(){
 
 
     // 최대 3장
-    const handleFileChange = async (event: any) => {
-        if(!images || images?.length >= 3){
-            alert("이미지는 최대 세 장까지만 올릴 수 있습니다.")
-            return;
-        }
-        const file = event.target.files[0];
-        console.log("파일", file)
-        if (file) {
-            try {
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+
+    // FileList를 배열로 변환
+    const selectedFiles = Array.from(event.target.files);
+
+    // 현재 이미지 개수 + 새로 선택한 개수가 3 초과인지 확인
+    if ((images?.length || 0) + selectedFiles.length > 3) {
+        Swal.fire({
+            title: "이미지는 업로드 오류",
+            text: "이미지는 최대 세 장까지만 업로드 할 수 있어요.",
+            icon: "warning",
+            confirmButtonText: "확인"
+        });
+        return;
+    }
+
+    try {
+        const resizedImages = await Promise.all(
+        selectedFiles.map(async (file) => {
             const base64StrImg = (await resizeFileToBase64(file, 1200, 1200)) as string;
-                setImages((prev) => [
-                    ...(prev || []), // 기존 배열 복사
-                    {
-                    photoString: base64StrImg,
-                    photoFille: file,
-                    tempSaved: false,
-                    savedPathUrl: "",
-                    },
-                ]);
-            } catch (error) {
-            alert("파일 변환 오류 발생 " + error);
-            }
-        }
+            return {
+            photoString: base64StrImg,
+            photoFille: file,
+            tempSaved: false,
+            savedPathUrl: "",
+            };
+        })
+        );
+
+        setImages((prev) => [...(prev || []), ...resizedImages]);
+    } catch (error) {
+        alert("파일 변환 오류 발생: " + error);
+    } finally {
+        // 파일 선택창 초기화 (같은 파일 다시 올릴 때 필요)
+        event.target.value = "";
+    }
     };
 
     return(
@@ -118,13 +132,14 @@ export default function Upload(){
                                 onChange={(e)=>setAuthor(e.target.value)}/>
                         </div>
                     </div>
-                <CommonTextArea 
-                    title="설명"
-                    value={desc}
-                    placeholder="설명"
-                    className="h-[100px]" 
-                    maxLength={250}                           
-                    onChange={(e)=>setDesc(e.target.value)}/>
+                    <CommonTextArea 
+                        title="설명"
+                        value={desc}
+                        placeholder="설명"
+                        className="h-[100px]" 
+                        maxLength={250}                           
+                        onChange={(e)=>setDesc(e.target.value)}
+                    />
                     <div className="w-full mt-6">
                         <label
                             htmlFor="file-upload"
@@ -139,9 +154,9 @@ export default function Upload(){
                             id="file-upload"
                             type="file"
                             className="hidden"
-                            onChange={(evt) => {
-                                handleFileChange(evt);
-                            }}
+                            multiple
+                            accept="image/*"
+                            onChange={handleFileChange}
                         />
                     </div>
                     <section className="flex justify-center mt-2">

@@ -47,9 +47,10 @@ export default function TagInput({ tags, setTags, maxTags = 3, info, required }:
         required={required}
         type="text"
         value={tagInput}
-        placeholder="# 없이 태그 입력 후 Enter"
+        placeholder="# 없이 태그 입력 후 Enter(완료)"
         onChange={(e) => setTagInput(e.target.value)}
         onKeyDown={handleAddTag}
+        enterKeyHint="done"
         className="w-full border rounded p-2 mt-1"
       />
       <div className="flex gap-2 mt-2 flex-wrap">
