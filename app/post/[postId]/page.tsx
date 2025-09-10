@@ -17,10 +17,57 @@ import { url } from "@/app/(constants)/Urls";
 import DeletePostButton from "./DeletePostButton";
 import TimeDiff from "./TimeDiff";
 import CopyUrl from "@/app/(components)/CopyUrl";
+import ReviewContainer from "@/app/(components)/(comment)/ReviewContainer";
+import { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
   params: Promise<{ postId: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const postId = (await params).postId;
+  const postData = await fetchPostDetail(Number(postId));
+
+  const title = postData.title ?? "고양이 포스트";
+  const description = postData.description ?? `${postData.catName ?? "고양이"}의 사진과 이야기`;
+  const images = postData.images?.length ? postData.images : ["/common/favicon.png"];
+  const keywords = [
+    ...(postData.tags || []),
+    postData.catName,
+    "고양이",
+    "냥이",
+  ].filter(Boolean) as string[];
+
+  return {
+    title: `${title} - 누젤캣`,
+    description,
+    keywords,
+    openGraph: {
+      title: `${title} - 누젤캣`,
+      description,
+      type: "article",
+      url: `${url.POST}/${postId}`,
+      images: images.map(img => ({
+        url: img,
+        width: 800,
+        height: 600,
+        alt: title,
+      })),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images,
+    },
+    alternates: {
+      canonical: `${url.POST}/${postId}`,
+    },
+  };
 }
 
 export default async function Post({ params }: Props,){
@@ -72,6 +119,9 @@ export default async function Post({ params }: Props,){
                         </div>
                     </div>
                 </div>
+                <section className="w-full">
+                    <ReviewContainer postId={Number(postId)}/>
+                </section>
                 <Line className="my-5" variant="half"/>
                 <RecommandTagImgList tags={postData.tags} postId={postId}/>
             </InnerContainer>
