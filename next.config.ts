@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-// const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const nextConfig = {
   images: {
@@ -12,15 +12,15 @@ const nextConfig = {
       },
     ],
   },
-  // async rewrites() {
-  //   console.log("Rewrite API to server : ", `${apiBaseUrl}seo/sitemap`);
-  //   return [
-  //     {
-  //       source: "/sitemap.xml",
-  //       destination: `${apiBaseUrl}seo/sitemap`,
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    console.log("Rewrite API to server : ", `${apiBaseUrl}seo/sitemap`);
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: `${apiBaseUrl}seo/sitemap`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
