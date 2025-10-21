@@ -87,7 +87,7 @@ export default async function Post({ params }: Props,){
                 <div className="w-full flex-col flex flex-start my-3">
                     <div className="w-full flex items-center">
                         <DarkText className="text-xl" text={postData.title}/>
-                        <LightDartText className="ms-2" text={"by " + postData.author} />
+                        {postData?.author &&<LightDartText className="ms-2" text={"by " + postData.author} />}
                     </div>
                     <div>
                         <MediumDarkText text={postData.description}/>            

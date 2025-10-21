@@ -55,7 +55,7 @@ export default function ConditionBtns() {
                     onChange={(evt) => {
                         setSortingCon(evt.target.value);
                     }}
-                    className="rounded p-2"
+                    className="rounded p-2 w-full caret-transparent"
                     >
                     <option value="score_desc">인기순</option>
                     <option value="desc">최신순</option>
