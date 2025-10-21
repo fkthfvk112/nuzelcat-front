@@ -4,7 +4,7 @@ import { Badge } from "@/app/(components)/Badge";
 import Container from "@/app/(components)/Container";
 import EmblaCarousel from "@/app/(components)/EmblaCarousel";
 import InnerContainer from "@/app/(components)/InnerContaner";
-import { DarkText, MediumDarkText, RedPinkText } from "@/app/(components)/Texts";
+import { DarkText, LightDartText, MediumDarkText, RedPinkText } from "@/app/(components)/Texts";
 import { ColorCode } from "@/app/(constants)/Colors";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EyesIcon from "@/app/(constants)/EyesIcon";
@@ -85,8 +85,9 @@ export default async function Post({ params }: Props,){
             />
             </div>
                 <div className="w-full flex-col flex flex-start my-3">
-                    <div className="w-full">
+                    <div className="w-full flex items-center">
                         <DarkText className="text-xl" text={postData.title}/>
+                        <LightDartText className="ms-2" text={"by " + postData.author} />
                     </div>
                     <div>
                         <MediumDarkText text={postData.description}/>            

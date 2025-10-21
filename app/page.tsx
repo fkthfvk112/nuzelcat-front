@@ -8,6 +8,7 @@ import { RedPinkText } from "./(components)/Texts";
 import { fetchPostCards } from "./(api)/(post)/post";
 import CustomPageNation from "./(components)/CustomPageNation";
 import RankData from "@/RankData";
+import ConditionBtns from "./(components)/ConditionBtn";
 
 export default async function Home() {
 
@@ -26,6 +27,7 @@ export default async function Home() {
       </div>
       <RankData/>
       <Container style={{padding:"1rem"}}>
+        <ConditionBtns/>
         <div className="flex flex-wrap gap-4 justify-center">
         {cardData.content.map((ele, inx)=><ImgCard key={inx} imgCardData={ele} maxWidth={400} minWidth={350}></ImgCard>)}
         </div>

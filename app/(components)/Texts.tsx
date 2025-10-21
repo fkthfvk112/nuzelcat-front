@@ -7,6 +7,21 @@ interface TextProp{
   className?: string;                 // 호출 시 className 추가 가능
 }
 
+
+export const LightDartText: React.FC<TextProp> = ({ text, style, className }) => {
+  const defaultStyle: CSSProperties = {
+    color:ColorCode.lightDark,
+    ...style,
+  };
+
+  return (
+    <div style={defaultStyle} className={className}>
+      {text}
+    </div>
+  );
+};
+
+
 export const DarkText: React.FC<TextProp> = ({ text, style, className }) => {
   const defaultStyle: CSSProperties = {
     color:ColorCode.dark,

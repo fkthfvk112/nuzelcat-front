@@ -1,6 +1,7 @@
 "use server";
 
 import { fetchPostCards } from "@/app/(api)/(post)/post";
+import ConditionBtns from "@/app/(components)/ConditionBtn";
 import Container from "@/app/(components)/Container";
 import CustomPageNation from "@/app/(components)/CustomPageNation";
 import ImgCard from "@/app/(components)/ImgCard";
@@ -47,6 +48,7 @@ export default async function SearchPage({ params, searchParams }: {
 
   return (
     <Container style={{ padding: "1rem" }}>
+      <ConditionBtns/>
       <div className="flex flex-wrap gap-4 justify-center">
         {cardData.content && cardData.content.length > 0 ? (
           cardData.content.map((card) => (
