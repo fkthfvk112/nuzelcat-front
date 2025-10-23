@@ -21,6 +21,7 @@ import Require from "../(components)/Require";
 import { validateUploadPayload } from "../(utils)/validator/validateUploadDate";
 import { emptyToNull } from "../(utils)/helper";
 import { UploadPayload } from "../(types)/post";
+import ClearIcon from '@mui/icons-material/Clear';
 
 export default function Upload(){
     const [title, setTitle]     = useState<string>("");
@@ -114,6 +115,12 @@ export default function Upload(){
     }
     };
 
+    /**현재 useState 배열에서 인덱스에 해당하는 사진 제거 */
+    const deletePhoto = (inx:number)=>{
+        const deletedPhoto = images.filter((_, index) => index !== inx);
+        setImages(deletedPhoto);
+    };
+
     return(
         <Container style={{ padding: '1rem' }}>
             <RedPinkText className="text-2xl mb-10" text="고양이 자랑하기"/>
@@ -163,6 +170,11 @@ export default function Upload(){
                     {
                     images?.map((ele, inx) => (
                         <div key={inx} className="relative w-[100px] h-[100px] img-wrapper-square">
+                                            <div className="w-full text-right">
+                    <button onClick={()=>deletePhoto(inx)} className="right-top-xboxBtn">
+                        <ClearIcon className="bg-white"/>
+                    </button>
+                </div> 
                             <Image
                             className="inner-img"
                             src={ele.photoString}

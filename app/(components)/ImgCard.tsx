@@ -33,8 +33,18 @@ export default function ImgCard({ imgCardData, maxWidth, minWidth, medalType }: 
   return (
     <div
       onClick={()=>{goPost()}}
-      className="flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm w-full mb-4
-                 cursor-pointer transform transition-transform duration-200 hover:scale-105 relative"
+      className={`flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm w-full mb-4
+                 cursor-pointer transform transition-transform duration-200 hover:scale-105 relative
+                 ${
+                    medalType === "gold"
+                      ? "border-2 border-yellow-400"
+                      : medalType === "silver"
+                      ? "border-2 border-gray-300"
+                      : medalType === "bronze"
+                      ? "border-2 border-orange-100"
+                      : ""
+                  }
+                 `}
       style={{ maxWidth: `${maxWidth}px`, minWidth: `${minWidth}px` }}
     >
       {medalType&&<div className="absolute top-2 z-10">

@@ -23,3 +23,13 @@ body {
   color: var(--foreground);
   font-family: 'SeoulNamsan', Arial, Helvetica, sans-serif;
 }
+
+.right-top-xboxBtn{
+  border: none;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -0.25rem;
+  right: 0.25rem ;
+  z-index: 50;
+}
