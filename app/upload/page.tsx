@@ -123,7 +123,7 @@ export default function Upload(){
 
     return(
         <Container style={{ padding: '1rem' }}>
-            <RedPinkText className="text-2xl mb-10 font2" text="고양이 자랑하기"/>
+            <RedPinkText className="text-2xl mb-3 font2" text="고양이 자랑하기"/>
             <InnerContainer style={{ maxWidth: '512px', minHeight:'300px', padding:"3rem" }}>
                 <div></div>
                 <CommonInput title="제목" type="text" placeholder="제목" value={title} required={true}

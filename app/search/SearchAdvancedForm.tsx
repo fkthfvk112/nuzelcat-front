@@ -8,6 +8,7 @@ import TagInput from "@/app/(components)/TagInput";
 import { GreenButton, RedPinkButton } from "@/app/(components)/Btn";
 import Container from "../(components)/Container";
 import InnerContainer from "../(components)/InnerContaner";
+import { RedPinkText } from "../(components)/Texts";
 
 type Props = {
   defaultTitle?: string;
@@ -61,6 +62,7 @@ export default function SearchAdvancedForm({
 
   return (
     <Container style={{ padding: '1rem' }}>
+        <RedPinkText className="text-2xl mb-3 font2" text="고양이 검색하기"/>
         <InnerContainer style={{ maxWidth: '512px', minHeight:'300px', padding:"3rem" }}>
             <div className="w-full">
                 <CommonInput

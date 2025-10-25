@@ -35,7 +35,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navigation/>
-        {children}
+         <main className="mx-auto w-full max-w-[720px] px-4 flex flex-col items-center justify-center">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

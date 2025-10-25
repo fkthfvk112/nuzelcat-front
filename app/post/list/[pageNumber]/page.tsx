@@ -43,20 +43,20 @@ export default async function SearchPage({ params, searchParams }: {
   let recentCats =
       cardData.content &&
       cardData.content.map((card, inx) => (
-          <ImgCard key={card.postId} imgCardData={card} maxWidth={180} minWidth={80} />
+          <ImgCard key={card.postId} imgCardData={card} maxWidth={300} minWidth={120} />
       ));
 
   return (
     <Container style={{ padding: "1rem" }}>
       <ConditionBtns/>
-      <div className="flex flex-wrap gap-4 justify-center">
+        <div className="w-full grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 justify-items-center">
         {cardData.content && cardData.content.length > 0 ? (
           cardData.content.map((card) => (
             <ImgCard
               key={card.postId}
               imgCardData={card}
-              maxWidth={180}
-              minWidth={80}
+              maxWidth={300}
+              minWidth={130}
             />
           ))
         ) : (

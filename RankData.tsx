@@ -22,11 +22,11 @@ export default async function RankData(){
   return(
       <div className="flex justify-center items-center gap-4 max-w-full flex-wrap" style={{ padding: '1rem' }}>
         <div className="w-full flex justify-center">
-          <ImgCard imgCardData={cardData.content[0]} maxWidth={180} minWidth={80} medalType={getMedalType(0)} />
+          <ImgCard imgCardData={cardData.content[0]} maxWidth={300} minWidth={130} medalType={getMedalType(0)} />
         </div>
-        <div className="flex justify-center w-full gap-3 flex-wrap">
-            <ImgCard imgCardData={cardData.content[1]} maxWidth={180} minWidth={80} medalType={getMedalType(1)} />
-            <ImgCard imgCardData={cardData.content[2]} maxWidth={180} minWidth={80} medalType={getMedalType(2)} />
+        <div className="w-full grid grid-cols-2 gap-3 justify-items-center">
+            <ImgCard imgCardData={cardData.content[1]} maxWidth={300} minWidth={130} medalType={getMedalType(1)} />
+            <ImgCard imgCardData={cardData.content[2]} maxWidth={300} minWidth={130} medalType={getMedalType(2)} />
         </div>
       </div>
   )

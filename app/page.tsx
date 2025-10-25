@@ -28,8 +28,8 @@ export default async function Home() {
       <RankData/>
       <Container style={{padding:"1rem"}}>
         <ConditionBtns/>
-        <div className="flex flex-wrap gap-2 justify-center">
-        {cardData.content.map((ele, inx)=><ImgCard key={inx} imgCardData={ele} maxWidth={180} minWidth={80}></ImgCard>)}
+        <div className="w-full grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 justify-items-center">
+          {cardData.content.map((ele, inx)=><ImgCard key={inx} imgCardData={ele} maxWidth={300} minWidth={130}></ImgCard>)}
         </div>
         <CustomPageNation
             queryStr={""}
