@@ -10,7 +10,7 @@ type Props = {
 
 export const Badge = ({ text, colorCode, href }: Props) => {
   const clsBase =
-    "flex justify-center items-center w-fit px-3 me-2 mt-1 text-white rounded-md font-bold whitespace-nowrap transform transition-transform duration-200";
+    "flex justify-center items-center w-fit px-1 me-1 mt-1.5 text-sm text-white rounded-md font-bold whitespace-nowrap transform transition-transform duration-200";
   const clsClickable = "cursor-pointer hover:scale-105";
   const clsStatic = "cursor-default";
 

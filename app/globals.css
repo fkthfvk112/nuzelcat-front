@@ -18,10 +18,23 @@
     font-weight: bold;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'GabiaSai';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-1@1.0/GabiaSai-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'SeoulNamsan', Arial, Helvetica, sans-serif;
+}
+
+.font2 {
+  font-family: 'GabiaSai', Arial, Helvetica, sans-serif !important;
 }
 
 .right-top-xboxBtn{

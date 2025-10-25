@@ -61,3 +61,15 @@ export const RedPinkText: React.FC<TextProp> = ({ text, style, className }) => {
   );
 };
 
+export const LightRedText: React.FC<TextProp> = ({ text, style, className }) => {
+  const defaultStyle: CSSProperties = {
+    color:ColorCode.lightRed,
+    ...style,
+  };
+
+  return (
+    <div style={defaultStyle} className={className}>
+      {text}
+    </div>
+  );
+};

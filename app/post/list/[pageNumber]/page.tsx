@@ -43,7 +43,7 @@ export default async function SearchPage({ params, searchParams }: {
   let recentCats =
       cardData.content &&
       cardData.content.map((card, inx) => (
-          <ImgCard key={card.postId} imgCardData={card} maxWidth={400} minWidth={350} />
+          <ImgCard key={card.postId} imgCardData={card} maxWidth={180} minWidth={80} />
       ));
 
   return (
@@ -55,8 +55,8 @@ export default async function SearchPage({ params, searchParams }: {
             <ImgCard
               key={card.postId}
               imgCardData={card}
-              maxWidth={400}
-              minWidth={350}
+              maxWidth={180}
+              minWidth={80}
             />
           ))
         ) : (

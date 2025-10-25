@@ -28,21 +28,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) 
-{
-  const navItems = [
-    { label: '홈', href: '/' },
-    { label: '업로드', href: url.UPLOAD },
-    // { label: '문의', href: '/contact' },
-  ];
-  
-  return (
+{  
+ return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navigation items={navItems} style={{ backgroundColor: '#fff' }}>
-          {/* <button style={{ marginLeft: 'auto' }}>로그인</button> */}
-        </Navigation>
+        <Navigation/>
         {children}
         <Footer />
       </body>

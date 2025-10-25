@@ -20,8 +20,14 @@ export default async function RankData(){
   }
 
   return(
-        <div className="flex justify-center items-center gap-4 max-w-full flex-wrap" style={{ padding: '1rem' }}>
-        {cardData.content.map((ele, inx)=><ImgCard key={inx} imgCardData={ele} maxWidth={400} minWidth={300} medalType={getMedalType(inx)} />)}
+      <div className="flex justify-center items-center gap-4 max-w-full flex-wrap" style={{ padding: '1rem' }}>
+        <div className="w-full flex justify-center">
+          <ImgCard imgCardData={cardData.content[0]} maxWidth={180} minWidth={80} medalType={getMedalType(0)} />
+        </div>
+        <div className="flex justify-center w-full gap-3 flex-wrap">
+            <ImgCard imgCardData={cardData.content[1]} maxWidth={180} minWidth={80} medalType={getMedalType(1)} />
+            <ImgCard imgCardData={cardData.content[2]} maxWidth={180} minWidth={80} medalType={getMedalType(2)} />
+        </div>
       </div>
   )
 }
