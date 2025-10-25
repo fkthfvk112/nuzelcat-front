@@ -13,6 +13,7 @@ import { RedPinkText } from "../(components)/Texts";
 type Props = {
   defaultTitle?: string;
   defaultCatName?: string;
+  defaultAuthorName?:string;
   defaultTags?: string[];
   defaultSortDir?: "asc" | "desc" | "score_asc" | "score_desc";
   defaultSize?: number;
@@ -28,6 +29,7 @@ const SORT_OPTIONS = [
 export default function SearchAdvancedForm({
   defaultTitle = "",
   defaultCatName = "",
+  defaultAuthorName = "",
   defaultTags = [],
   defaultSortDir = "score_desc",
   defaultSize = 12,
@@ -35,6 +37,7 @@ export default function SearchAdvancedForm({
   const router = useRouter();
 
   const [title, setTitle] = useState(defaultTitle);
+  const [author, setAuthor] = useState(defaultAuthorName);
   const [catName, setCatName] = useState(defaultCatName);
   const [tags, setTags] = useState<string[]>(defaultTags);
   const [sortDir, setSortDir] = useState<"asc" | "desc" | "score_asc" | "score_desc">(defaultSortDir);
@@ -42,6 +45,7 @@ export default function SearchAdvancedForm({
     const qs = new URLSearchParams();
     if (title.trim())   qs.set("title", title.trim());
     if (catName.trim()) qs.set("catName", catName.trim());
+    if (author.trim()) qs.set("author", author.trimRight());
     if (tags.length)    qs.set("tags", encodeURIComponent(tags.join(",")));
     qs.set("sortDir", sortDir);
     return qs.toString();
@@ -68,7 +72,7 @@ export default function SearchAdvancedForm({
                 <CommonInput
                 title="제목"
                 type="text"
-                placeholder="제목"
+                placeholder="제목 입력"
                 value={title}
                 maxLength={50}
                 onChange={(e) => setTitle(e.target.value)}/>
@@ -77,10 +81,20 @@ export default function SearchAdvancedForm({
                 <CommonInput
                 title="고양이 이름"
                 type="text"
-                placeholder="고양이 이름"
+                placeholder="고양이 이름 입력"
                 value={catName}
                 maxLength={20}
                 onChange={(e) => setCatName(e.target.value)}
+                />
+            </div>
+            <div className="w-full mt-3">
+                <CommonInput
+                title="작성자"
+                type="text"
+                placeholder="작성자명 입력"
+                value={author}
+                maxLength={20}
+                onChange={(e) => setAuthor(e.target.value)}
                 />
             </div>
             <TagInput

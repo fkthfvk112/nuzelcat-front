@@ -17,6 +17,7 @@ export async function fetchPostDetail(postId: number): Promise<PostDetailInterfa
 export async function fetchPostCards(params: {
   title?: string;
   catName?: string;
+  author?: string;
   tags?: string[];
   sortDir?: "asc" | "desc"|"score_asc"|"score_desc";
   exceptId?:number | string;
@@ -31,6 +32,7 @@ export async function fetchPostCards(params: {
   const queryParams = removeUndefined({
     title: params.title,
     catName: params.catName,
+    author:params.author,
     tags: params.tags,
     sortDir: params.sortDir ?? "score_desc", // 기본값  = 인기도 내림차순
     exceptPostId: params.exceptId,
